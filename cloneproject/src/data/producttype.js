@@ -22,8 +22,8 @@ export const Products =[
           postedAt: 1431787516,
           numberOfReviews: 5400,
           rating: 4.1,
-          color: ["WHITE", "BLUE","Red"],
-          gender: "FEMALE",
+          color: ["White", "Red","Blue"],
+          gender: "WOMEN"
       },
       {
             id: "828020",
@@ -65,7 +65,7 @@ export const Products =[
               numberOfReviews: 5400,
               rating: 4.1,
               color: ["WHITE", "BLUE"],
-              gender: "FEMALE",
+              gender: "WOMEN",
           },
           {
                 id: "828022",
@@ -84,8 +84,8 @@ export const Products =[
                 postedAt: 1431787519,
                 numberOfReviews: 5400,
                 rating: 4.1,
-                color: ["WHITE", "BLUE","PURPLE"],
-                gender: "MALE",
+                color: ["Red"],
+                gender: "WOMEN",
             },
             
               
@@ -244,7 +244,7 @@ export const Products =[
           gender: "FEMALE",
       },
       {
-        id: "828019",
+        id: "828030",
         brandName: "Roadster",
         productName: "Men Printed Relaxed Casual Shirt",
         price: 34555,
@@ -265,7 +265,7 @@ export const Products =[
         gender: "FEMALE",
     },
     {
-      id: "828019",
+      id: "828031",
       brandName: "",
       productName: "ERE&NOW Slim Fit Striped Mandarin Collar Cotton Casual Shirt",
       price: 34555,
@@ -286,7 +286,7 @@ export const Products =[
       gender: "FEMALE",
   },
   {
-    id: "828019",
+    id: "828032",
     brandName: "HIGHLANDER",
     productName: "Olive Green Cotton Tailored Jacket",
     price: 34555,
@@ -307,7 +307,7 @@ export const Products =[
     gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828033",
   brandName: "Roadster",
   productName: "men Oversized-Fit Shirt",
   price: 34555,
@@ -328,7 +328,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828034",
   brandName: "Mast & Harbour",
   productName: "Men Checked Oversized Casual Shirt",
   price: 34555,
@@ -349,7 +349,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828035",
   brandName: "Mast & Harbour",
   productName: "Men Standard Opaque Checked Casual Shirt",
   price: 34555,
@@ -370,7 +370,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828036",
   brandName: "Roadster",
   productName: "Relaxed Fit Drop-Shoulder Sleeves Casual Shirt",
   price: 34555,
@@ -391,7 +391,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828037",
   brandName: "Mast & Harbour",
   productName: "Men Standard Tartan Checked Cotton Casual Shirt",
   price: 34555,
@@ -412,7 +412,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828038",
   brandName: "Roadster",
   productName: "Men Blue Printed Casual Shirt ",
   price: 34555,
@@ -442,7 +442,7 @@ export const Products =[
       discount: "30-70% OFF",
       category_products :[
         {
-          id: "828019",
+          id: "828039",
           brandName: "",
           productName: "Men Rapid-Dry Sports Tracksuit",
           price: 34555,
@@ -463,7 +463,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828040",
           brandName: "",
           productName: "Men Jogger-Style Yoga Track Pants",
           price: 34555,
@@ -484,7 +484,7 @@ export const Products =[
           gender: "FEMALE",
         },,
         {
-          id: "828019",
+          id: "828041",
           brandName: "",
           productName: "Men Pure Cotton Yoga Shorts",
           price: 34555,
@@ -503,7 +503,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828042",
           brandName: "",
           productName: "Men Jet Black Solid Regular Fit ",
           price: 34555,
@@ -524,7 +524,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828043",
           brandName: "",
           productName: "Men Training Tracksuit",
           price: 34555,
@@ -543,7 +543,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828044",
           brandName: "",
           productName: "Oversized Track Pants",
           price: 34555,
@@ -564,7 +564,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828045",
           brandName: "",
           productName: "SCULPTFLEX Printed Training Sweatshirt",
           price: 34555,
@@ -585,7 +585,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828046",
           brandName: "",
           productName: " Active Premium Gym Tracksuits",
           price: 34555,
@@ -606,7 +606,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828047",
           brandName: "",
           productName: "",
           price: 34555,
@@ -626,7 +626,7 @@ export const Products =[
           color: ["WHITE", "BLUE","Red"],
           gender: "FEMALE",
         },{
-          id: "828019",
+          id: "828048",
           brandName: "",
           productName: "Rapid-Dry Training Joggers",
           price: 34555,
@@ -647,7 +647,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828049",
           brandName: "Men Solid Slim Fit Sports Rapid-Dry Joggers",
           productName: "Men Training Track pants",
           price: 34555,
@@ -668,7 +668,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828050",
           brandName: "",
           productName: "Men Rapid-Dry Lifestyle Track pants",
           price: 34555,
@@ -689,7 +689,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828051",
           brandName: "",
           productName: "Active Track Pants ",
           price: 34555,
@@ -721,7 +721,7 @@ export const Products =[
       discount: "30-70% OFF",
       category_products :[
         {
-          id: "828019",
+          id: "828052",
           brandName: "",
           productName: "Active Track Pants ",
           price: 34555,
@@ -742,7 +742,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828053",
           brandName: "",
           productName: " Black Solid Rapid Dry Active Tights ",
           price: 34555,
@@ -763,7 +763,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828054",
           brandName: "",
           productName: "Cozimi Round Neck Women Top & Bottom Set ",
           price: 34555,
@@ -786,7 +786,7 @@ export const Products =[
         },
 
         {
-          id: "828019",
+          id: "828055",
           brandName: "",
           productName: "Full Sleeve Solid Women Sweatshirt",
           price: 34555,
@@ -808,7 +808,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828056",
           brandName: "Women Short Sleeve Crop High Waist ",
           productName: "Active Track Pants ",
           price: 34555,
@@ -830,7 +830,7 @@ export const Products =[
           gender: "FEMALE",
         },
         {
-          id: "828019",
+          id: "828057",
           brandName: "zorastore Korean Style Women's 3-Piece Running Track ",
           productName: "Active Track Pants ",
           price: 34555,
@@ -853,7 +853,7 @@ export const Products =[
         }
 ,
 {
-  id: "828019",
+  id: "828058",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -875,7 +875,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828059",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -898,7 +898,7 @@ export const Products =[
 }
 ,
 {
-  id: "828019",
+  id: "828060",
   brandName: "",
   productName: "Women's Pack of 2 Black Solid Tights ",
   price: 34555,
@@ -920,7 +920,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828061",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -942,7 +942,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828062",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -964,7 +964,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828063",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -986,7 +986,7 @@ export const Products =[
   gender: "FEMALE",
 }
 ,{
-  id: "828019",
+  id: "828064",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,
@@ -1008,7 +1008,7 @@ export const Products =[
   gender: "FEMALE",
 },
 {
-  id: "828019",
+  id: "828065",
   brandName: "",
   productName: "Active Track Pants ",
   price: 34555,

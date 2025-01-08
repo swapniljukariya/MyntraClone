@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Products } from "../data/producttype";
-import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
+import { source } from "../data/NavData"; // Assume source is imported from NavData.js
+import ProductCard from "./ProductCard"; // A reusable ProductCard component
+import ProductGrid from "./ProductGrid";
 
-const ProductDetails = () => {
-  const { id } = useParams();
-  const navigate = useNavigate(); // React Router's navigation hook
+const ManPage = () => {
+  const navigate = useNavigate();
 
-  // Find the current product category based on the id from route params
-  const productCategory = Products.find((product) => product.id === id);
+  // Use only the 0th index of the source array
+  const productCategory = source[0];
 
   const [selectedFilters, setSelectedFilters] = useState({
     gender: [],
@@ -17,7 +17,6 @@ const ProductDetails = () => {
     priceRange: [],
   });
 
-  // Handle checkbox change for filters
   const handleFilterChange = (category, value) => {
     setSelectedFilters((prevFilters) => {
       const currentCategory = prevFilters[category];
@@ -29,9 +28,8 @@ const ProductDetails = () => {
     });
   };
 
-  // Function to filter products dynamically based on selected filters
   const getFilteredProducts = () => {
-    if (!productCategory) return [];
+    if (!productCategory || !productCategory.category_products) return [];
 
     let filteredProducts = [...productCategory.category_products];
 
@@ -125,9 +123,9 @@ const ProductDetails = () => {
   }
 
   return (
-    <div>
-      {/* Header */}
-      <header className="flex justify-between items-center mt-14 bg-gray-100 px-6 py-4 shadow-md">
+    <div className="h-screen flex mt-14 flex-col">
+      {/* Fixed Header */}
+      <header className="flex justify-between items-center bg-gray-100 px-6 py-4 shadow-md">
         <div className="flex items-center space-x-2">
           <span className="text-gray-600">Home</span>
           <span className="text-gray-500">/</span>
@@ -146,7 +144,8 @@ const ProductDetails = () => {
         </div>
       </header>
 
-      <div className="flex h-screen mt-4 bg-white">
+      {/* Main Content: Sidebar and Product List */}
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
           <div className="mb-4">
@@ -200,7 +199,7 @@ const ProductDetails = () => {
           </div>
         </aside>
 
-        {/* Main Content */}
+        {/* Main Product List */}
         <main className="flex-1 p-6 overflow-y-auto">
           
 
@@ -208,7 +207,7 @@ const ProductDetails = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)} // Navigate to ProductPage.js
+                onClick={() => navigate(`/product/${product.id}`)}
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />
@@ -221,4 +220,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ManPage;

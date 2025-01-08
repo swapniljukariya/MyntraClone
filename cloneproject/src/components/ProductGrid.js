@@ -13,7 +13,7 @@ const ProductGrid = () => {
 
     return (
       <div
-        className="bg-purple-700 text-white rounded-lg p-4 text-center shadow-md flex flex-col items-center h-[400px] cursor-pointer"
+        className="bg-purple-700 text-white rounded-lg p-4 text-center shadow-md flex flex-col items-center h-[440px] cursor-pointer"
         onClick={handleClick} // Add the onClick event to the card
       >
         <img

@@ -1,46 +1,117 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import logo from './img/logo.png'
-import lens from './img/lens.png'
-import out from './img/logout.png'
-import account from './img/account.png';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { FaSearch, FaUserCircle, FaRegHeart, FaShoppingBag } from "react-icons/fa";
+import logo from "./img/logo.png";
 
-function header(props) {
+function Header({ setSearch }) {
   return (
-    <>
-    <div className='flex h-28  text-sm font-bold text-gray-800 items-center p-4  gap-6 shadow-lg bg-white '>
-      <img src={logo} alt='logo' className='w-24 h-14 ml-6'/>
-      <h1 className='ml-4'>MEN</h1>
-      <h1  className='ml-8'>WOMEN</h1>
-      <h1 className='ml-8'>KIDS</h1>
-      <h1 className='ml-8'>HOME & LIVING</h1>
-      <h1 className='ml-8'>BEAUTY</h1>
-      <h1 className='ml-8'>STUDIO</h1>
+    <div className="flex items-center px-6 shadow-lg bg-white fixed top-0 w-full z-50">
+      {/* Logo */}
+      <div className="flex items-center ml-6">
+        <img src={logo} alt="logo" className="w-28 h-16 cursor-pointer" />
+      </div>
 
-      <div className='border border-gray-100 flex items-center justify-center bg-gray-100 w-96 h-10 ml-96'>
-        <img src={lens} alt ="lens" className='h-3 w-3 mt-4'/>
-        <input onChange={(e)=> props.setSearch(e.target.value)} className="bg-gray-100 text-gray-900 font-normal  outline-none
-        text-sm rounded-sm  block w-full p-2.5 ml-3 " placeholder="Search for products" required/>
+      {/* Navigation Links */}
+      <div className="flex items-center space-x-9 text-md ml-32 font-semibold text-gray-800">
+        <NavLink
+          to="/men"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          MEN
+        </NavLink>
+        <NavLink
+          to="/women"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          WOMEN
+        </NavLink>
+        <NavLink
+          to="/kids"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          KIDS
+        </NavLink>
+        <NavLink
+          to="/home-living"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          HOME & LIVING
+        </NavLink>
+        <NavLink
+          to="/beauty"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          BEAUTY
+        </NavLink>
+        <NavLink
+          to="/studio"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          STUDIO
+        </NavLink>
       </div>
-      <div className='ml-6 text-xs'>
-      <img src ={account} alt=" out" className='w-4 h-4 ml-2'/>
-      <h1>Logout</h1>
-      </div>
-      <div className='ml-6 text-xs'>
-        <img src={out} alt ="" className='w-4 h-4 ml-2'/>
-        <h1>Login</h1>
-      </div>
-      
-      
-     
 
-      
+      {/* Search Bar */}
+      <div className="flex items-center bg-gray-100 border border-gray-200 rounded-md w-96 h-10 ml-auto">
+        <FaSearch className="text-gray-500 ml-3" />
+        <input
+          type="text"
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search for products"
+          className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm"
+        />
+      </div>
+
+      {/* Icons */}
+      <div className="flex items-center space-x-7 ml-8 text-gray-800">
+        <NavLink
+          to="/profile"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          <div className="flex flex-col items-center text-xs">
+            <FaUserCircle size={30} className="text-2xl" />
+            <span>Profile</span>
+          </div>
+        </NavLink>
+        <NavLink
+          to="/wishlist"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          <div className="flex flex-col items-center text-xs">
+            <FaRegHeart size={30} className="text-2xl" />
+            <span>Wishlist</span>
+          </div>
+        </NavLink>
+        <NavLink
+          to="/bag"
+          className={({ isActive }) =>
+            isActive ? "text-pink-600" : "hover:text-pink-600"
+          }
+        >
+          <div className="flex flex-col items-center text-xs">
+            <FaShoppingBag size={30} className="text-2xl" />
+            <span>Bag</span>
+          </div>
+        </NavLink>
+      </div>
     </div>
-  </>
-  )
+  );
 }
 
-
-
-export default header
-
+export default Header;
