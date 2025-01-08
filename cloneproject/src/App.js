@@ -17,7 +17,7 @@ import HomeLivingPage from "./components/HomeLivingPage"; // Home & Living categ
 import BeautyPage from "./components/BeautyPage"; // Beauty category page
 import StudioPage from "./components/StudioPage"; // Studio page
 import Profile from "./components/Profile.js"; // Profile page
-import Wishlist from "./components/Wishlist"; // Wishlist page
+import Wishlist from "./components/WishListPage"; // Wishlist page
 import Bag from "./components/Bag"; // Shopping bag page
 import { Outlet } from "react-router-dom";
 

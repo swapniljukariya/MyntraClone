@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useWishlist } from "../context/WishlistContext"; // Import Wishlist Context
 
 const ProductCard = ({ product }) => {
   const [hovered, setHovered] = useState(false); // For hover state
   const [currentImage, setCurrentImage] = useState(0); // For image slider
+
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist(); // Access wishlist functions
+
+  // Check if the product is already in the wishlist
+  const inWishlist = isInWishlist(product.id);
 
   // Image slider logic
   useEffect(() => {
@@ -34,11 +40,26 @@ const ProductCard = ({ product }) => {
             }`}
           />
         ))}
+
         {hovered && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end justify-center p-4">
             {/* Wishlist Button */}
-            <button className="bg-white text-red-500 px-3 py-1 rounded-full shadow hover:bg-red-500 hover:text-white transition">
-              <i className="fas fa-heart"></i> Wishlist
+            <button
+              className={`px-3 py-1 rounded-full shadow transition ${
+                inWishlist
+                  ? "bg-red-500 text-white hover:bg-red-600"
+                  : "bg-white text-red-500 hover:bg-red-500 hover:text-white"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering parent click
+                if (inWishlist) {
+                  removeFromWishlist(product.id); // Remove if in wishlist
+                } else {
+                  addToWishlist(product); // Add to wishlist
+                }
+              }}
+            >
+              Wishlist<i className={`fas fa-heart ${inWishlist ? "text-white" : "text-red-500"}`}></i>
             </button>
           </div>
         )}
