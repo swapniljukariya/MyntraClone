@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import for navigation
 import { useWishlist } from "../context/WishlistContext"; // Import Wishlist Context
 
 const ProductCard = ({ product }) => {
@@ -6,6 +7,7 @@ const ProductCard = ({ product }) => {
   const [currentImage, setCurrentImage] = useState(0); // For image slider
 
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist(); // Access wishlist functions
+  const navigate = useNavigate(); // Hook for navigation
 
   // Check if the product is already in the wishlist
   const inWishlist = isInWishlist(product.id);
@@ -27,6 +29,7 @@ const ProductCard = ({ product }) => {
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => navigate(`/productPage/${product.id}`)} // Navigate to product page on click
     >
       {/* Image Section */}
       <div className="relative h-[300px] overflow-hidden">
@@ -34,8 +37,8 @@ const ProductCard = ({ product }) => {
           <img
             key={index}
             src={img}
-            alt={product.productName}
-            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
+            alt={`${product.productName} image ${index + 1}`}
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
               index === currentImage ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -50,6 +53,7 @@ const ProductCard = ({ product }) => {
                   ? "bg-red-500 text-white hover:bg-red-600"
                   : "bg-white text-red-500 hover:bg-red-500 hover:text-white"
               }`}
+              aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"} // Accessibility
               onClick={(e) => {
                 e.stopPropagation(); // Prevent triggering parent click
                 if (inWishlist) {
@@ -59,7 +63,12 @@ const ProductCard = ({ product }) => {
                 }
               }}
             >
-              Wishlist<i className={`fas fa-heart ${inWishlist ? "text-white" : "text-red-500"}`}></i>
+              {inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+              <i
+                className={`fas fa-heart ${
+                  inWishlist ? "text-white" : "text-red-500"
+                }`}
+              ></i>
             </button>
           </div>
         )}

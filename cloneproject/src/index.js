@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { WishlistProvider } from './context/WishlistContext';
+import {BagProvider} from  './context/BagContext'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <WishlistProvider>
-      <App />
+     <BagProvider>
+      <App/>
+      </BagProvider>
 </WishlistProvider>
 </React.StrictMode>
 );

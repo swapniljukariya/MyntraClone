@@ -1,8 +1,26 @@
-import React from "react";
-import { useWishlist } from "../context/WishlistContext"; // Import Wishlist Context
+import React, { useState } from "react";
+import { useWishlist } from "../context/WishlistContext";
+import { useBag } from "../context/BagContext"; // Import BagContext
 
 const WishlistPage = () => {
-  const { wishlist, removeFromWishlist } = useWishlist(); // Access wishlist and its functions
+  const { wishlist = [], removeFromWishlist } = useWishlist(); // Default to empty array
+  const { addToBag } = useBag(); // Add to Bag context
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const handleMoveToBag = (product) => {
+    setSelectedProduct(product);
+    setPopupVisible(true);
+  };
+
+  const closePopup = () => {
+    if (selectedProduct) {
+      addToBag({ ...selectedProduct, quantity: 1 }); // Add the selected product to the bag
+      removeFromWishlist(selectedProduct.id); // Remove from wishlist after moving to the bag
+    }
+    setSelectedProduct(null);
+    setPopupVisible(false);
+  };
 
   return (
     <div className="p-6 mt-10">
@@ -19,7 +37,6 @@ const WishlistPage = () => {
               key={product.id}
               className="relative bg-white rounded-lg border border-gray-300 shadow-md p-4 w-full"
             >
-              {/* Remove Button (X) */}
               <button
                 className="absolute top-3 right-3 bg-gray-100 text-gray-500 p-2 rounded-full hover:bg-gray-200 hover:text-red-500 transition"
                 onClick={() => removeFromWishlist(product.id)}
@@ -27,7 +44,6 @@ const WishlistPage = () => {
                 <i className="fas fa-times"></i>
               </button>
 
-              {/* Product Image */}
               <div className="h-[450px] w-full overflow-hidden rounded-lg">
                 <img
                   src={product.images[0]}
@@ -36,7 +52,6 @@ const WishlistPage = () => {
                 />
               </div>
 
-              {/* Product Details */}
               <div className="mt-4">
                 <h3 className="text-md font-semibold text-gray-800 truncate">
                   {product.productName}
@@ -56,15 +71,51 @@ const WishlistPage = () => {
                 </div>
               </div>
 
-              {/* Move to Bag Button */}
               <button
-                className="mt-6 w-full text-pink-500  py-2 rounded-md font-medium hover:bg-red-600 transition"
-                onClick={() => console.log(`Moved ${product.productName} to bag`)}
+                className="mt-6 w-full text-pink-500 border border-pink-500 py-2 rounded-md font-medium hover:bg-pink-500 hover:text-white transition"
+                onClick={() => handleMoveToBag(product)}
               >
                 Move to Bag
               </button>
             </div>
           ))}
+        </div>
+      )}
+
+      {isPopupVisible && selectedProduct && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md">
+            <div className="flex justify-between items-center mb-4">
+              <button
+                className="text-gray-500 hover:text-red-500"
+                onClick={() => setPopupVisible(false)}
+              >
+                X
+              </button>
+            </div>
+            <div className="flex gap-5 bottom-3 border-b-2 p-6">
+              <img
+                src={selectedProduct.images[0]}
+                className="h-36 w-36"
+                alt={selectedProduct.productName}
+              />
+              <h3 className="text-lg font-bold">{selectedProduct.productName}</h3>
+            </div>
+
+            <div className="flex gap-16 p-8">
+              <button className="rounded-xl border p-3 border-black">30</button>
+              <button className="rounded-xl border p-3 border-black">32</button>
+              <button className="rounded-xl border p-3 border-black">34</button>
+              <button className="rounded-xl border p-3 border-black">36</button>
+            </div>
+
+            <button
+              className="w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600 transition"
+              onClick={closePopup}
+            >
+              Done
+            </button>
+          </div>
         </div>
       )}
     </div>

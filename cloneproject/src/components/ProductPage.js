@@ -1,68 +1,96 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Products } from "../data/producttype";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { source } from "../data/NavData";
+import ProductCard from "./ProductCard";
 
 const ProductPage = () => {
-  const { id } = useParams(); // Get product ID from URL
+  const { category } = useParams(); // Extract the category from the URL
+  const navigate = useNavigate();
 
-  // Find the product by searching in all categories
-  const product = Products.flatMap((p) => p.category_products).find(
-    (p) => p.id === id
+  // Find the matching product category
+  const productCategory = source.find(
+    (cat) => cat.name.toLowerCase() === category.toLowerCase()
   );
 
-  if (!product) {
+  const [selectedFilters, setSelectedFilters] = useState({
+    gender: [],
+    discount: [],
+    color: [],
+    priceRange: [],
+  });
+
+  const handleFilterChange = (filterCategory, value) => {
+    setSelectedFilters((prevFilters) => {
+      const currentCategory = prevFilters[filterCategory];
+      const updatedFilters = currentCategory.includes(value)
+        ? currentCategory.filter((item) => item !== value)
+        : [...currentCategory, value];
+      return { ...prevFilters, [filterCategory]: updatedFilters };
+    });
+  };
+
+  const getFilteredProducts = () => {
+    if (!productCategory || !productCategory.category_products) return [];
+    let filteredProducts = [...productCategory.category_products];
+
+    // Add filtering logic here (e.g., gender, discount, color, price range)
+
+    return filteredProducts;
+  };
+
+  const filteredProducts = getFilteredProducts();
+
+  if (!productCategory) {
     return (
-      <div className="text-center text-2xl text-red-500 mt-16">
-        Product not found!
+      <div className="flex items-center justify-center h-screen bg-gray-50">
+        <div className="text-center text-red-500 font-bold text-xl">
+          Product Category Not Found
+        </div>
       </div>
     );
   }
 
-  const { productName, price, originalPrice, discountPercent, images, rating } =
-    product;
-
   return (
-    <div className="bg-gray-100 min-h-screen mt-22 p-8">
-      <div className="max-w-10xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Image Gallery */}
-
-        
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`${productName} ${index}`}
-              className="w-auto  h-auto object-cover rounded-lg shadow-md"
-            />
-          ))}
+    <div className="h-screen flex flex-col mt-14">
+      {/* Header */}
+      <header className="flex justify-between items-center bg-gray-100 px-6 py-4 shadow-md">
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-600">Home</span>
+          <span className="text-gray-500">/</span>
+          <span className="text-gray-800 font-semibold">
+            {productCategory.productType}
+          </span>
         </div>
-
-        {/* Product Details */}
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-800">{productName}</h1>
-          <p className="text-gray-600 mt-2">{rating} ⭐ | Reviews: {product.numberOfReviews}</p>
-
-          {/* Price Details */}
-          <div className="mt-4">
-            <span className="text-xl font-bold text-green-600">₹{price}</span>
-            <span className="text-gray-500 line-through ml-4">
-              ₹{originalPrice}
-            </span>
-            <span className="text-red-500 ml-4">({discountPercent}% OFF)</span>
-          </div>
-          <p className="text-sm text-gray-600 mt-2">Inclusive of all taxes</p>
-
-          {/* Action Buttons */}
-          <div className="mt-6 flex space-x-4">
-            <button className="bg-pink-600 text-white px-6 py-3 rounded-full w-full hover:bg-pink-700 transition">
-              ADD TO BAG
-            </button>
-            <button className="border border-gray-300 px-6 py-3 rounded-full w-full hover:bg-gray-200 transition">
-              ❤️ WISHLIST
-            </button>
-          </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Search for products, brands..."
+            className="px-4 py-2 border rounded-md w-96"
+          />
         </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
+          {/* Render filters here */}
+        </aside>
+
+        {/* Product List */}
+        <main className="flex-1 p-6 overflow-y-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => navigate(`/productPage/${product.id}`)}
+                className="cursor-pointer"
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </main>
       </div>
     </div>
   );

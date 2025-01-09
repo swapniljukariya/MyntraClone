@@ -207,7 +207,7 @@ const ManPage = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => navigate(`/productPage/${product.id}`)}
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

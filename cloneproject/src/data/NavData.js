@@ -1,7 +1,7 @@
 export const source=[
     {
         id : "441",
-        productType: "Men wear",
+        productType: "men",
         image: "",
         discount: "50-80% OFF",
         category_products :[
@@ -254,8 +254,8 @@ export const source=[
         ]
      },
      {
-      id : "441",
-      productType: "Women wear",
+      id : "442",
+      productType: "women",
       image: "",
       discount: "50-80% OFF",
       category_products :[
@@ -505,8 +505,8 @@ export const source=[
         ]
         },
         {
-          id : "",
-          productType: "Kids wear",
+          id : "443",
+          productType: "kids",
           image: "",
           discount: "50-80% OFF",
           category_products :[
