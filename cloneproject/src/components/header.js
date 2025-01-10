@@ -1,117 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FaSearch, FaUserCircle, FaRegHeart, FaShoppingBag } from "react-icons/fa";
+import { FaSearch, FaUserCircle, FaRegHeart, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import logo from "./img/logo.png";
 
 function Header({ setSearch }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="flex items-center px-6 shadow-lg bg-white fixed top-0 w-full z-50">
+    <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50">
       {/* Logo */}
-      <div className="flex items-center ml-6">
-        <img src={logo} alt="logo" className="w-28 h-16 cursor-pointer" />
+      <div className="flex items-center">
+        <img src={logo} alt="logo" className="w-24 h-12 cursor-pointer" />
+      </div>
+
+      {/* Hamburger Menu */}
+      <div className="md:hidden ml-auto">
+        {isMenuOpen ? (
+          <FaTimes
+            className="text-2xl text-gray-800 cursor-pointer"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        ) : (
+          <FaBars
+            className="text-2xl text-gray-800 cursor-pointer"
+            onClick={() => setIsMenuOpen(true)}
+          />
+        )}
       </div>
 
       {/* Navigation Links */}
-      <div className="flex items-center space-x-9 text-md ml-32 font-semibold text-gray-800">
-        <NavLink
-          to="/men"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          MEN
-        </NavLink>
-        <NavLink
-          to="/women"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          WOMEN
-        </NavLink>
-        <NavLink
-          to="/kids"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          KIDS
-        </NavLink>
-        <NavLink
-          to="/home-living"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          HOME & LIVING
-        </NavLink>
-        <NavLink
-          to="/beauty"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          BEAUTY
-        </NavLink>
-        <NavLink
-          to="/studio"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          STUDIO
-        </NavLink>
+      <div
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } absolute top-full left-0 w-full bg-white md:static md:flex md:items-center md:space-x-8 md:block text-sm font-semibold text-gray-800`}
+      >
+        {["men", "women", "kids", "home-living", "beauty", "studio"].map((item) => (
+          <NavLink
+            key={item}
+            to={`/${item}`}
+            className={({ isActive }) =>
+              isActive
+                ? "text-pink-600 block px-4 py-2 md:inline hover:text-pink-600"
+                : "block px-4 py-2 md:inline hover:text-pink-600"
+            }
+            onClick={() => setIsMenuOpen(false)} // Close menu after clicking
+          >
+            {item.toUpperCase().replace("-", " & ")}
+          </NavLink>
+        ))}
       </div>
 
       {/* Search Bar */}
-      <div className="flex items-center bg-gray-100 border border-gray-200 rounded-md w-96 h-10 ml-auto">
+      <div className="hidden md:flex items-center bg-gray-100 border border-gray-200 rounded-md w-72 lg:w-96 h-10 ml-auto md:ml-6">
         <FaSearch className="text-gray-500 ml-3" />
         <input
           type="text"
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search for products"
-          className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm"
+          className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm w-full"
         />
       </div>
 
       {/* Icons */}
-      <div className="flex items-center space-x-7 ml-8 text-gray-800">
-        <NavLink
-          to="/profile"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          <div className="flex flex-col items-center text-xs">
-            <FaUserCircle size={30} className="text-2xl" />
-            <span>Profile</span>
-          </div>
-        </NavLink>
-        <NavLink
-          to="/wishlist"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          <div className="flex flex-col items-center text-xs">
-            <FaRegHeart size={30} className="text-2xl" />
-            <span>Wishlist</span>
-          </div>
-        </NavLink>
-        <NavLink
-          to="/bag"
-          className={({ isActive }) =>
-            isActive ? "text-pink-600" : "hover:text-pink-600"
-          }
-        >
-          <div className="flex flex-col items-center text-xs">
-            <FaShoppingBag size={30} className="text-2xl" />
-            <span>Bag</span>
-          </div>
-        </NavLink>
+      <div className="flex items-center space-x-4 md:space-x-6 ml-4 text-gray-800">
+        {[
+          { to: "/profile", icon: <FaUserCircle size={24} />, label: "Profile" },
+          { to: "/wishlist", icon: <FaRegHeart size={24} />, label: "Wishlist" },
+          { to: "/bag", icon: <FaShoppingBag size={24} />, label: "Bag" },
+        ].map(({ to, icon, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              isActive ? "text-pink-600" : "hover:text-pink-600"
+            }
+          >
+            <div className="flex flex-col items-center text-xs">
+              {icon}
+              <span className="hidden md:block">{label}</span>
+            </div>
+          </NavLink>
+        ))}
       </div>
     </div>
   );
 }
 
 export default Header;
+c
