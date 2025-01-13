@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { source } from "../data/NavData"; // Assume source is imported from NavData.js
 import ProductCard from "./ProductCard"; // A reusable ProductCard component
+import { debounce } from "lodash"; // Import debounce from lodash
 
 const WomenPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const WomenPage = () => {
     color: [],
     priceRange: [],
   });
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = debounce((query) => {
+    setSearchQuery(query);
+  }, 500);
 
   const handleFilterChange = (category, value) => {
     setSelectedFilters((prevFilters) => {
@@ -71,14 +78,21 @@ const WomenPage = () => {
       );
     }
 
+    // Filter by search query (case-insensitive)
+    if (searchQuery) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
     return filteredProducts;
   };
 
   const filteredProducts = getFilteredProducts();
 
   const renderFilters = (category, options) => {
-    return options.map((option) => (
-      <li key={option}>
+    return options.map((option, index) => (
+      <li key={`${category}-${option}-${index}`}>
         <label>
           <input
             type="checkbox"
@@ -139,6 +153,7 @@ const WomenPage = () => {
             type="text"
             placeholder="Search for products, brands..."
             className="px-4 py-2 border rounded-md w-96"
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       </header>
@@ -204,7 +219,7 @@ const WomenPage = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => navigate(`/product-Page/${product.id}`)}
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

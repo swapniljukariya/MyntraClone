@@ -66,9 +66,8 @@ const ProductDetails = () => {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.priceRange.some((range) => {
           const [minPrice, maxPrice] = range
-            .replace("Rs.", "")
-            .split(" to ")
-            .map((price) => parseInt(price, 10));
+            .match(/\d+/g) // Extract numeric values from the range string
+            .map((price) => parseInt(price, 10)); // Convert to integers
           return product.price >= minPrice && product.price <= maxPrice;
         })
       );
@@ -138,11 +137,7 @@ const ProductDetails = () => {
           </span>
         </div>
         <div>
-          <input
-            type="text"
-            placeholder="Search for products, brands..."
-            className="px-4 py-2 border rounded-md w-96"
-          />
+          <div className="font-semibold text-black">{renderSelectedFilters()}</div>
         </div>
       </header>
 
@@ -151,7 +146,6 @@ const ProductDetails = () => {
         <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-3">Selected Filters:</h3>
-            <div>{renderSelectedFilters()}</div>
           </div>
 
           <div className="mb-6">
@@ -191,10 +185,11 @@ const ProductDetails = () => {
             <h3 className="text-lg font-semibold mb-3">Price Range</h3>
             <ul>
               {renderFilters("priceRange", [
-                "Rs. 100 to Rs. 1000",
-                "Rs. 1000 to Rs. 2000",
-                "Rs. 2000 to Rs. 3000",
-                "Rs. 3000 to Rs. 4000",
+                "Rs. 1000 to Rs. 5000",
+                "Rs. 5000 to Rs.12000",
+                "Rs. 12000 to Rs. 20000",
+                "Rs. 20000 to Rs. 35000",
+                "Rs. 35000 to Rs. 50000",
               ])}
             </ul>
           </div>
@@ -202,13 +197,12 @@ const ProductDetails = () => {
 
         {/* Main Content */}
         <main className="flex-1 p-6 overflow-y-auto">
-          
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)} // Navigate to ProductPage.js
+                onClick={() => navigate(`/product-page/${product.id}`)}
+
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

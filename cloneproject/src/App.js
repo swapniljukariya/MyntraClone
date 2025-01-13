@@ -20,6 +20,8 @@ import Profile from "./components/Profile.js"; // Profile page
 import Wishlist from "./components/WishListPage"; // Wishlist page
 import Bag from "./components/Bag"; // Shopping bag page
 import {Outlet} from "react-router-dom";
+import FilteredResults from "./components/FilteredResults";
+
 
 function Layout() {
   return (
@@ -41,7 +43,11 @@ const router = createBrowserRouter(
 
       {/* Product details and individual product page */}
       <Route path="product/:id" element={<ProductDetails />} />
-      <Route path="productPage/:id" element={<ProductPage />} />
+      <Route path="/product-page/:id" element={<ProductPage />} />
+
+
+
+
       {/* Navigation paths for each category */}
       <Route path="men" element={<MenPage />} />
       <Route path="women" element={<WomenPage />} />
@@ -53,6 +59,7 @@ const router = createBrowserRouter(
       <Route path="profile" element={<Profile />} />
       <Route path="wishlist" element={<Wishlist />} />
       <Route path="bag" element={<Bag />} />
+      <Route path="/filtered-results" element={<FilteredResults />} />
     </Route>
   )
 );

@@ -5,7 +5,7 @@ import ProductGrid from "./ProductGrid";
 
 function Main() {
   return (
-    <div>
+    <div className='mt-16'>
       <OfferTime />
       <Banner />
       <ProductGrid />

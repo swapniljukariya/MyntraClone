@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { source } from "../data/NavData"; // Assume source is imported from NavData.js
 import ProductCard from "./ProductCard"; // A reusable ProductCard component
 import ProductGrid from "./ProductGrid";
+import { debounce } from "lodash"; // You can install lodash for debouncing
 
 const ManPage = () => {
   const navigate = useNavigate();
 
-  // Use only the 0th index of the source array
   const productCategory = source[0];
 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -16,6 +16,11 @@ const ManPage = () => {
     color: [],
     priceRange: [],
   });
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const handleSearch = debounce((query) => {
+    setSearchQuery(query);
+  }, 500);
 
   const handleFilterChange = (category, value) => {
     setSelectedFilters((prevFilters) => {
@@ -72,14 +77,21 @@ const ManPage = () => {
       );
     }
 
+    // Filter by search query (case-insensitive)
+    if (searchQuery) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
     return filteredProducts;
   };
 
   const filteredProducts = getFilteredProducts();
 
   const renderFilters = (category, options) => {
-    return options.map((option) => (
-      <li key={option}>
+    return options.map((option, index) => (
+      <li key={`${category}-${option}-${index}`}>
         <label>
           <input
             type="checkbox"
@@ -140,6 +152,7 @@ const ManPage = () => {
             type="text"
             placeholder="Search for products, brands..."
             className="px-4 py-2 border rounded-md w-96"
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       </header>
@@ -201,13 +214,11 @@ const ManPage = () => {
 
         {/* Main Product List */}
         <main className="flex-1 p-6 overflow-y-auto">
-          
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/productPage/${product.id}`)}
+                onClick={() => navigate(`/product-Page/${product.id}`)}
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

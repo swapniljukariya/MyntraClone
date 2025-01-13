@@ -228,7 +228,7 @@ const KidsPage = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => navigate(`/Product-Page/${product.id}`)}  // Updated path for navigation
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

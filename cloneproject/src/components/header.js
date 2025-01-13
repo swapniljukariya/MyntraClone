@@ -1,10 +1,26 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
 import { FaSearch, FaUserCircle, FaRegHeart, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import logo from "./img/logo.png";
+import { SearchContext } from "../context/SearchContext"; // Import the context
 
-function Header({ setSearch }) {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { updateQuery } = useContext(SearchContext); // Get the updateQuery function from context
+  const [searchValue, setSearchValue] = useState(""); // Local state to track input value
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchValue(query);
+    updateQuery(query); // Update the query in the global state
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && searchValue.trim()) {
+      navigate("/filtered-results"); // Navigate to the FilteredResults page
+    }
+  };
 
   return (
     <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50">
@@ -55,7 +71,9 @@ function Header({ setSearch }) {
         <FaSearch className="text-gray-500 ml-3" />
         <input
           type="text"
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchValue}
+          onChange={handleSearchChange} // Call handleSearchChange on input
+          onKeyDown={handleKeyDown} // Trigger navigation on Enter
           placeholder="Search for products"
           className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm w-full"
         />
@@ -84,7 +102,6 @@ function Header({ setSearch }) {
       </div>
     </div>
   );
-}
+};
 
 export default Header;
-c
