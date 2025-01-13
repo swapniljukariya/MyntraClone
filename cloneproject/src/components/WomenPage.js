@@ -136,7 +136,7 @@ const WomenPage = () => {
   }
 
   return (
-    <div className="h-screen flex mt-14 flex-col">
+    <div className="h-screen flex mt-20 flex-col">
       {/* Fixed Header */}
       <header className="flex justify-between items-center bg-gray-100 px-6 py-4 shadow-md">
         <div className="flex items-center space-x-2">
@@ -148,14 +148,8 @@ const WomenPage = () => {
             {productCategory.productType}
           </span>
         </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Search for products, brands..."
-            className="px-4 py-2 border rounded-md w-96"
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        </div>
+      
+         
       </header>
 
       {/* Main Content: Sidebar and Product List */}

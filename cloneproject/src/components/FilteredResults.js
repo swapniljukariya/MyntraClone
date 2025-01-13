@@ -28,11 +28,11 @@ const FilteredResults = () => {
   const filterItems = () => {
     let filtered = Products.flatMap((product) =>
       product.category_products.filter((item) =>
-        item.productName?.toLowerCase().includes(query.toLowerCase())
+        [item.productName, ...(item.queries || [])]
+          .some((field) => field?.toLowerCase().includes(query.toLowerCase()))
       )
     );
   
-    // Apply selected filters
     if (selectedFilters.gender.length) {
       filtered = filtered.filter((item) =>
         selectedFilters.gender.includes(item.gender?.toUpperCase())
@@ -70,6 +70,7 @@ const FilteredResults = () => {
   
     setFilteredItems(filtered);
   };
+  
   
 
   useEffect(() => {
@@ -159,7 +160,7 @@ const FilteredResults = () => {
 
         {/* Main Content */}
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols- lg:grid-cols-6 gap-4">
             {filteredItems.length > 0 ? (
               filteredItems.map((product) => (
                 <div key={product.id} className="cursor-pointer">

@@ -25,13 +25,18 @@ import FilteredResults from "./components/FilteredResults";
 
 function Layout() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
+      {/* Header */}
       <Header />
-      <main>
+
+      {/* Main content - Ensure it grows to fill space */}
+      <main className="flex-grow">
         <Outlet />
       </main>
+
+      {/* Footer */}
       <Footer />
-    </>
+    </div>
   );
 }
 

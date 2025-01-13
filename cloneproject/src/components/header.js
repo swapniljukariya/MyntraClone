@@ -23,10 +23,12 @@ const Header = () => {
   };
 
   return (
-    <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50">
-      {/* Logo */}
+    <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50 ">
+      {/* Logo - Now it's a NavLink to home */}
       <div className="flex items-center">
-        <img src={logo} alt="logo" className="w-24 h-12 cursor-pointer" />
+        <NavLink to="/">
+          <img src={logo} alt="logo" className="w-24 h-12 cursor-pointer" />
+        </NavLink>
       </div>
 
       {/* Hamburger Menu */}
@@ -67,7 +69,7 @@ const Header = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="hidden md:flex items-center bg-gray-100 border border-gray-200 rounded-md w-72 lg:w-96 h-10 ml-auto md:ml-6">
+      <div className="hidden md:flex items-center bg-gray-100 border border-gray-200 rounded-md w-96 lg:w-96 h-10 ml-auto md:ml-6">
         <FaSearch className="text-gray-500 ml-3" />
         <input
           type="text"
