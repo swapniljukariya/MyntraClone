@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => navigate(`/productPage/${product.id}`)} // Navigate to product page on click
+      
     >
       {/* Image Section */}
       <div className="relative h-[300px] overflow-hidden">
