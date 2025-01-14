@@ -29,7 +29,7 @@ export const categories = [
       categories: [
         {
           categoryId: 1, // Ethnic
-          video: "https://www.youtube.com/watch?v=example_video_1",
+          video: "https://www.youtube.com/shorts/5qROsFOsxNQ",
           product_category: [
             { productId: 101, name: "Embroidered Saree" },
             { productId: 102, name: "Traditional Jewelry Set" },
@@ -37,7 +37,7 @@ export const categories = [
         },
         {
           categoryId: 3, // Casual
-          video: "https://www.youtube.com/watch?v=example_video_2",
+          video: "https://www.youtube.com/shorts/hjjxp4jib8k",
           product_category: [
             { productId: 103, name: "Casual Denim Jacket" },
             { productId: 104, name: "Stylish Sneakers" },

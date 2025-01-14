@@ -21,6 +21,7 @@ import Wishlist from "./components/WishListPage"; // Wishlist page
 import Bag from "./components/Bag"; // Shopping bag page
 import {Outlet} from "react-router-dom";
 import FilteredResults from "./components/FilteredResults";
+import Login from './components/Login'
 
 
 function Layout() {
@@ -60,6 +61,7 @@ const router = createBrowserRouter(
       <Route path="home-living" element={<HomeLivingPage />} />
       <Route path="beauty" element={<BeautyPage />} />
       <Route path="studio" element={<StudioPage />} />
+      <Route path="profile" element={<Login />} />
       {/* Additional pages */}
       <Route path="profile" element={<Profile />} />
       <Route path="wishlist" element={<Wishlist />} />

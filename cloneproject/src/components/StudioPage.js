@@ -3,7 +3,7 @@ import { categories, influencers } from "../data/influencer";
 
 const StudioPage = () => {
   return (
-    <div className="bg-pink-50 flex justify-center min-h-screen p-4">
+    <div className="bg-pink-50 flex justify-center min-h-screen mt-20 p-4">
       {/* Mobile Boundary */}
       <div className="bg-white w-full max-w-md shadow-lg rounded-lg overflow-hidden">
         {/* Header */}
