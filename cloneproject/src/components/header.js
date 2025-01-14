@@ -69,16 +69,23 @@ const Header = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="hidden md:flex items-center bg-gray-100 border border-gray-200 rounded-md w-96 lg:w-96 h-10 ml-auto md:ml-6">
-        <FaSearch className="text-gray-500 ml-3" />
-        <input
-          type="text"
-          value={searchValue}
-          onChange={handleSearchChange} // Call handleSearchChange on input
-          onKeyDown={handleKeyDown} // Trigger navigation on Enter
-          placeholder="Search for products"
-          className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm w-full"
-        />
+      <div className="flex items-center w-full md:w-96 ml-8 lg:w-96 h-10 bg-gray-100 border border-gray-200 rounded-md ml-auto md:ml-6">
+        <div className="flex items-center w-full">
+          <FaSearch className="text-gray-500 ml-3" />
+          <input
+            type="text"
+            value={searchValue}
+            onChange={handleSearchChange} // Call handleSearchChange on input
+            onKeyDown={handleKeyDown} // Trigger navigation on Enter
+            placeholder="Search for products"
+            className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm w-full"
+          />
+        </div>
+
+        {/* Visible on small screens */}
+        <div className="block md:hidden ml-3 ">
+     
+        </div>
       </div>
 
       {/* Icons */}
