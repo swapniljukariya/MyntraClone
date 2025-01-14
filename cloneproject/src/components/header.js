@@ -1,33 +1,33 @@
 import React, { useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaSearch, FaUserCircle, FaRegHeart, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import logo from "./img/logo.png";
-import { SearchContext } from "../context/SearchContext"; // Import the context
+import { SearchContext } from "../context/SearchContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { updateQuery } = useContext(SearchContext); // Get the updateQuery function from context
-  const [searchValue, setSearchValue] = useState(""); // Local state to track input value
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { updateQuery } = useContext(SearchContext);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchValue(query);
-    updateQuery(query); // Update the query in the global state
+    updateQuery(query);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && searchValue.trim()) {
-      navigate("/filtered-results"); // Navigate to the FilteredResults page
+      navigate("/filtered-results");
     }
   };
 
   return (
-    <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50 ">
-      {/* Logo - Now it's a NavLink to home */}
+    <div className="flex items-center px-4 py-2 shadow-lg bg-white fixed top-0 w-full z-50">
+      {/* Logo */}
       <div className="flex items-center">
         <NavLink to="/">
-          <img src={logo} alt="logo" className="w-24 h-12 cursor-pointer" />
+          <img src={logo} alt="logo" className="w-20 h-10 cursor-pointer" />
         </NavLink>
       </div>
 
@@ -61,7 +61,7 @@ const Header = () => {
                 ? "text-pink-600 block px-4 py-2 md:inline hover:text-pink-600"
                 : "block px-4 py-2 md:inline hover:text-pink-600"
             }
-            onClick={() => setIsMenuOpen(false)} // Close menu after clicking
+            onClick={() => setIsMenuOpen(false)}
           >
             {item.toUpperCase().replace("-", " & ")}
           </NavLink>
@@ -75,25 +75,20 @@ const Header = () => {
           <input
             type="text"
             value={searchValue}
-            onChange={handleSearchChange} // Call handleSearchChange on input
-            onKeyDown={handleKeyDown} // Trigger navigation on Enter
+            onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
             placeholder="Search for products"
-            className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm w-full"
+            className="bg-gray-100 text-gray-800 outline-none ml-3 text-sm md:text-base w-full placeholder:text-sm"
           />
-        </div>
-
-        {/* Visible on small screens */}
-        <div className="block md:hidden ml-3 ">
-     
         </div>
       </div>
 
       {/* Icons */}
-      <div className="flex items-center space-x-4 md:space-x-6 ml-4 text-gray-800">
+      <div className="flex items-center space-x-3 md:space-x-6 ml-4 text-gray-800">
         {[
-          { to: "/profile", icon: <FaUserCircle size={24} />, label: "Profile" },
-          { to: "/wishlist", icon: <FaRegHeart size={24} />, label: "Wishlist" },
-          { to: "/bag", icon: <FaShoppingBag size={24} />, label: "Bag" },
+          { to: "/profile", icon: <FaUserCircle size={20} />, label: "Profile" },
+          { to: "/wishlist", icon: <FaRegHeart size={20} />, label: "Wishlist" },
+          { to: "/bag", icon: <FaShoppingBag size={20} />, label: "Bag" },
         ].map(({ to, icon, label }) => (
           <NavLink
             key={to}
