@@ -5,9 +5,9 @@ import ProductCard from "./ProductCard";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // React Router's navigation hook
+  const navigate = useNavigate();
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  // Find the current product category based on the id from route params
   const productCategory = Products.find((product) => product.id === id);
 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -17,7 +17,6 @@ const ProductDetails = () => {
     priceRange: [],
   });
 
-  // Handle checkbox change for filters
   const handleFilterChange = (category, value) => {
     setSelectedFilters((prevFilters) => {
       const currentCategory = prevFilters[category];
@@ -29,20 +28,17 @@ const ProductDetails = () => {
     });
   };
 
-  // Function to filter products dynamically based on selected filters
   const getFilteredProducts = () => {
     if (!productCategory) return [];
 
     let filteredProducts = [...productCategory.category_products];
 
-    // Filter by gender
     if (selectedFilters.gender.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.gender.includes(product.gender.toUpperCase())
       );
     }
 
-    // Filter by discount
     if (selectedFilters.discount.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.discount.some(
@@ -52,7 +48,6 @@ const ProductDetails = () => {
       );
     }
 
-    // Filter by color
     if (selectedFilters.color.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.color.some((color) =>
@@ -61,13 +56,12 @@ const ProductDetails = () => {
       );
     }
 
-    // Filter by price range
     if (selectedFilters.priceRange.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.priceRange.some((range) => {
           const [minPrice, maxPrice] = range
-            .match(/\d+/g) // Extract numeric values from the range string
-            .map((price) => parseInt(price, 10)); // Convert to integers
+            .match(/\d+/g)
+            .map((price) => parseInt(price, 10));
           return product.price >= minPrice && product.price <= maxPrice;
         })
       );
@@ -125,9 +119,8 @@ const ProductDetails = () => {
 
   return (
     <div>
-      {/* Header */}
-      <header className="flex justify-between items-center mt-14 bg-gray-100 px-6 py-4 shadow-md">
-        <div className="flex items-center space-x-2">
+      <header className="flex flex-wrap justify-between items-center p-4 bg-gray-100 shadow-md mt-14">
+        <div className="flex items-center space-x-2 text-sm">
           <span className="text-gray-600">Home</span>
           <span className="text-gray-500">/</span>
           <span className="text-gray-600">Clothing</span>
@@ -136,25 +129,28 @@ const ProductDetails = () => {
             {productCategory.productType}
           </span>
         </div>
-        <div>
-          <div className="font-semibold text-black">{renderSelectedFilters()}</div>
-        </div>
+        <button
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+          className="md:hidden px-4 py-2 bg-purple-500 text-white rounded"
+        >
+          Filters
+        </button>
+        <div>{renderSelectedFilters()}</div>
       </header>
 
-      <div className="flex h-screen mt-4 bg-white">
-        {/* Sidebar */}
-        <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-3">Selected Filters:</h3>
-          </div>
-
+      <div className="flex flex-col md:flex-row">
+        <aside
+          className={`${
+            isSidebarOpen ? "block" : "hidden"
+          } md:block w-full md:w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg`}
+        >
+          <h3 className="text-lg font-semibold mb-3">Filters</h3>
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Gender</h3>
+            <h4 className="font-semibold">Gender</h4>
             <ul>{renderFilters("gender", ["MEN", "WOMEN", "BOYS", "GIRLS"])}</ul>
           </div>
-
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Discount</h3>
+            <h4 className="font-semibold">Discount</h4>
             <ul>
               {renderFilters("discount", [
                 "10% and above",
@@ -166,9 +162,8 @@ const ProductDetails = () => {
               ])}
             </ul>
           </div>
-
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Color</h3>
+            <h4 className="font-semibold">Color</h4>
             <ul>
               {renderFilters("color", [
                 "White",
@@ -180,9 +175,8 @@ const ProductDetails = () => {
               ])}
             </ul>
           </div>
-
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-3">Price Range</h3>
+          <div>
+            <h4 className="font-semibold">Price Range</h4>
             <ul>
               {renderFilters("priceRange", [
                 "Rs. 1000 to Rs. 5000",
@@ -195,14 +189,12 @@ const ProductDetails = () => {
           </div>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <main className="flex-1 p-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
                 onClick={() => navigate(`/product-page/${product.id}`)}
-
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

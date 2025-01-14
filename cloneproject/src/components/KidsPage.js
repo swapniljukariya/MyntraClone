@@ -17,14 +17,13 @@ const KidsPage = () => {
   });
 
   const [sortOption, setSortOption] = useState("brand"); // Default sort option: brand
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
 
   const handleFilterChange = (category, value) => {
     setSelectedFilters((prevFilters) => {
-      const currentCategory = prevFilters[category];
-      const updatedFilters = currentCategory.includes(value)
-        ? currentCategory.filter((item) => item !== value)
-        : [...currentCategory, value];
-
+      const updatedFilters = prevFilters[category].includes(value)
+        ? prevFilters[category].filter((item) => item !== value)
+        : [...prevFilters[category], value];
       return { ...prevFilters, [category]: updatedFilters };
     });
   };
@@ -34,14 +33,13 @@ const KidsPage = () => {
 
     let filteredProducts = [...productCategory.category_products];
 
-    // Filter by gender
+    // Apply filters to products
     if (selectedFilters.gender.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.gender.includes(product.gender.toUpperCase())
       );
     }
 
-    // Filter by discount
     if (selectedFilters.discount.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.discount.some(
@@ -51,16 +49,16 @@ const KidsPage = () => {
       );
     }
 
-    // Filter by color
     if (selectedFilters.color.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.color.some((color) =>
-          product.color.map((c) => c.toLowerCase()).includes(color.toLowerCase())
+          product.color
+            .map((c) => c.toLowerCase())
+            .includes(color.toLowerCase())
         )
       );
     }
 
-    // Filter by price range
     if (selectedFilters.priceRange.length) {
       filteredProducts = filteredProducts.filter((product) =>
         selectedFilters.priceRange.some((range) => {
@@ -73,13 +71,19 @@ const KidsPage = () => {
       );
     }
 
-    // Sort by selected sort option
-    if (sortOption === "brand") {
-      filteredProducts.sort((a, b) => a.brandName.localeCompare(b.brandName));
-    } else if (sortOption === "priceLowToHigh") {
-      filteredProducts.sort((a, b) => a.price - b.price);
-    } else if (sortOption === "priceHighToLow") {
-      filteredProducts.sort((a, b) => b.price - a.price);
+    // Sort products based on the selected option
+    switch (sortOption) {
+      case "brand":
+        filteredProducts.sort((a, b) => a.brandName.localeCompare(b.brandName));
+        break;
+      case "priceLowToHigh":
+        filteredProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "priceHighToLow":
+        filteredProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
     }
 
     return filteredProducts;
@@ -104,8 +108,7 @@ const KidsPage = () => {
   };
 
   const renderSelectedFilters = () => {
-    const categories = Object.keys(selectedFilters);
-    const selectedItems = categories.flatMap((category) =>
+    const selectedItems = Object.keys(selectedFilters).flatMap((category) =>
       selectedFilters[category].map((item) => ({
         category,
         item,
@@ -133,7 +136,7 @@ const KidsPage = () => {
   }
 
   return (
-    <div className="h-screen flex mt-20 flex-col">
+    <div className="h-screen flex flex-col mt-20">
       {/* Fixed Header */}
       <header className="flex justify-between items-center bg-gray-100 px-6 py-4 shadow-md">
         <div className="flex items-center space-x-2">
@@ -145,23 +148,43 @@ const KidsPage = () => {
             {productCategory.productType}
           </span>
         </div>
-        
+        <button
+          className="md:hidden p-2 bg-purple-500 text-white rounded"
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 4h18M3 12h18M3 20h18"
+            />
+          </svg>
+        </button>
       </header>
 
-      {/* Main Content: Sidebar and Product List */}
+      {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
+        <aside
+          className={`w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg ${
+            isSidebarOpen ? "block" : "hidden md:block"
+          }`}
+        >
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-3">Selected Filters:</h3>
             <div>{renderSelectedFilters()}</div>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3">Gender</h3>
             <ul>{renderFilters("gender", ["BOYS", "GIRLS"])}</ul>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3">Discount</h3>
             <ul>
@@ -175,7 +198,6 @@ const KidsPage = () => {
               ])}
             </ul>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3">Color</h3>
             <ul>
@@ -189,7 +211,6 @@ const KidsPage = () => {
               ])}
             </ul>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3">Price Range</h3>
             <ul>
@@ -201,7 +222,6 @@ const KidsPage = () => {
               ])}
             </ul>
           </div>
-
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-3">Sort By</h3>
             <select
@@ -216,13 +236,13 @@ const KidsPage = () => {
           </div>
         </aside>
 
-        {/* Main Product List */}
+        {/* Product List */}
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => navigate(`/Product-Page/${product.id}`)}  // Updated path for navigation
+                onClick={() => navigate(`/Product-Page/${product.id}`)}
                 className="cursor-pointer"
               >
                 <ProductCard product={product} />

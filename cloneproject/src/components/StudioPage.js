@@ -35,78 +35,52 @@ const StudioPage = () => {
             </div>
           </section>
 
-          {/* Influencers Section */}
-          <section>
+          {/* Follow Our Top Influencers Section */}
+          <section className="mb-6">
             <h2 className="text-sm font-bold mb-3">Follow Our Top Influencers</h2>
-            <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
               {influencers.map((influencer) => (
                 <div
                   key={influencer.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden border"
+                  className="flex flex-col items-center bg-gray-50 p-2 rounded-lg shadow-sm"
                 >
-                  {/* Influencer Details */}
-                  <div className="flex items-center p-4 space-x-4 border-b">
-                    <img
-                      src={influencer.profileImage}
-                      alt={influencer.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <h3 className="text-sm font-semibold">
-                        {influencer.name}
-                      </h3>
-                      <button className="text-red-500 text-xs font-medium">
-                        Follow
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Categories and Products */}
-                  {influencer.categories.map((category) => (
-                    <div key={category.categoryId} className="p-4 space-y-4">
-                      <h4 className="text-sm font-semibold text-gray-800">
-                        {categories.find((cat) => cat.id === category.categoryId)
-                          ?.name || ""}
-                      </h4>
-
-                      {/* Video Section */}
-                      <div className="relative">
-                        <iframe
-                          src={category.video}
-                          title={`Video for ${category.categoryId}`}
-                          className="w-full h-48 rounded-lg"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
-
-                      {/* Products */}
-                      <div className="grid grid-cols-2 gap-4">
-                        {category.product_category.map((product) => (
-                          <div
-                            key={product.productId}
-                            className="flex flex-col items-center bg-gray-50 p-2 rounded-lg shadow-sm"
-                          >
-                            <img
-                              src="https://via.placeholder.com/150" // Placeholder for product image
-                              alt={product.name}
-                              className="w-16 h-16 rounded-md object-cover"
-                            />
-                            <h5 className="text-xs font-medium mt-2 text-center">
-                              {product.name}
-                            </h5>
-                            <p className="text-xs text-gray-600">
-                              {product.price}
-                            </p>
-                            <p className="text-xs text-red-500">
-                              {product.discount}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                  <img
+                    src={influencer.profileImage}
+                    alt={influencer.name}
+                    className="w-full h-40 object-cover rounded-lg"
+                  />
+                  <h3 className="text-sm font-medium mt-2">{influencer.name}</h3>
+                  <button className="text-red-500 text-xs font-medium mt-1">
+                    Follow
+                  </button>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Reels Section */}
+          <section>
+            <h2 className="text-sm font-bold mb-3">Trending Reels</h2>
+            <div className="space-y-4">
+              {influencers.map((influencer) =>
+                influencer.categories.map((category, index) => (
+                  <div
+                    key={`${influencer.id}-${index}`}
+                    className="bg-gray-50 p-3 rounded-lg shadow-sm"
+                  >
+                    <h3 className="text-xs font-medium mb-1">
+                      {influencer.name} - {categories.find(cat => cat.id === category.categoryId)?.name || 'Unknown'}
+                    </h3>
+                    <iframe
+                      src={category.video}
+                      title={`Reel by ${influencer.name}`}
+                      className="w-full h-48 rounded-lg"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ))
+              )}
             </div>
           </section>
         </main>

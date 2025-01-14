@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { source } from "../data/NavData"; // Assume source is imported from NavData.js
 import ProductCard from "./ProductCard"; // A reusable ProductCard component
-import ProductGrid from "./ProductGrid";
 import { debounce } from "lodash"; // You can install lodash for debouncing
 
 const ManPage = () => {
@@ -17,7 +16,8 @@ const ManPage = () => {
     priceRange: [],
   });
   const [searchQuery, setSearchQuery] = useState("");
-  
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   const handleSearch = debounce((query) => {
     setSearchQuery(query);
   }, 500);
@@ -135,7 +135,7 @@ const ManPage = () => {
   }
 
   return (
-    <div className="h-screen flex mt-20 flex-col">
+    <div className="h-screen flex flex-col mt-16">
       {/* Fixed Header */}
       <header className="flex justify-between items-center bg-gray-100 px-6 py-4 shadow-md">
         <div className="flex items-center space-x-2">
@@ -147,13 +147,22 @@ const ManPage = () => {
             {productCategory.productType}
           </span>
         </div>
-       
+        <button
+          className="md:hidden px-4 py-2 bg-purple-500 text-white rounded"
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+        >
+          Filters
+        </button>
       </header>
 
       {/* Main Content: Sidebar and Product List */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg">
+        <aside
+          className={`${
+            isSidebarOpen ? "block" : "hidden"
+          } md:block w-full md:w-64 bg-gray-100 p-6 overflow-y-auto shadow-lg`}
+        >
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-3">Selected Filters:</h3>
             <div>{renderSelectedFilters()}</div>
@@ -207,7 +216,7 @@ const ManPage = () => {
 
         {/* Main Product List */}
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}

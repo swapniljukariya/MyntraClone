@@ -19,13 +19,23 @@ export const categories = [
       name: "Athleisure",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQJiu_xv1md7dAAKNRqqX5jIZLP_gBkTOkw&s",
     },
+    {
+        id: 5,
+        name: "Athleisure",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQJiu_xv1md7dAAKNRqqX5jIZLP_gBkTOkw&s",
+      },
+      {
+        id: 6,
+        name: "Athleisure",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQJiu_xv1md7dAAKNRqqX5jIZLP_gBkTOkw&s",
+      }
   ];
   
   export const influencers = [
     {
       id: 1,
       name: "Raveena Tekwani",
-      profileImage: "https://tring-coin.objectstore.e2enetworks.net/tring/202104211958_FhabOhskRW6qlE3t.png",
+      profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-icJYxO6VpW4lNeJ8JXGfdYFsElawqRhsbTGtALwquKVnCVpbBKkf_LW8EC1HG77rS3c&usqp=CAU",
       categories: [
         {
           categoryId: 1, // Ethnic
