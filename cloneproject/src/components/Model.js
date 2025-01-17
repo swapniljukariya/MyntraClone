@@ -59,23 +59,6 @@ const ModelPage = () => {
             </div>
           </div>
 
-          {/* Posts Section */}
-          <div className="mt-4 p-4">
-            <h3 className="text-sm font-bold mb-3">Posts</h3>
-            {/* Check if posts exist */}
-            <div className="flex flex-col space-y-4">
-              {influencer.posts?.length > 0 ? (
-                influencer.posts.map((post, index) => (
-                  <div key={index} className="bg-gray-100 p-4 rounded shadow-sm">
-                    <p className="text-sm text-gray-800">{post}</p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-xs text-gray-600">No posts available.</p>
-              )}
-            </div>
-          </div>
-
           {/* Reels Section */}
           <div className="mt-4 p-4">
             <h3 className="text-sm font-bold mb-3">Reels</h3>

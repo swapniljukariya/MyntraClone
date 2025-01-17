@@ -7,7 +7,7 @@ export const categories = [
     {
       id: 2,
       name: "Party",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1fjyUskOJeeVUBTcksbjSvoqcRpcQRdOKdg&s",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIxyYkiqBt3ejeLe83bZSOvTsIRgWda29HHw&s",
     },
     {
       id: 3,
@@ -18,7 +18,17 @@ export const categories = [
       id: 4,
       name: "Athleisure",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAQJiu_xv1md7dAAKNRqqX5jIZLP_gBkTOkw&s",
-    }
+    },
+    {
+        id: 5,
+        name: "Active wear",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRc5slHb-X7RhDl1sLOLBlp9rbm1-TZkAf1w&s",
+      },
+      {
+        id: 6,
+        name: "office wear",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJwO9dfA-O-sSyhfyVay67-O3GM9p9MCf3Bg&s",
+      }
   ];
   
   export const influencers = [
@@ -35,7 +45,7 @@ export const categories = [
       categories: [
         {
           categoryId: 1, // Ethnic
-          video: "https://www.youtube.com/shorts/5qROsFOsxNQ",
+          video: "https://www.youtube.com/shorts/W4igwtCJcbM",
           product_category: [
             {
                 id: "9149335",
@@ -385,8 +395,8 @@ export const categories = [
         id: 3,
         name: "Mira Sen",
         username: "mira_sen",
-        profileImage: "https://via.placeholder.com/150",
-        bannerImage: "https://via.placeholder.com/600",
+        profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvFsPEFBpvfhtfPhJhi11BSGG7j6EVLed-Yw&s",
+        bannerImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz03IKgsnEydJyTWgIiiYxJ_f43qYmbvp42g&s",
         description:"Elevate your everyday look with sleek and modern outfits for every occasion.",
         followers: "12.5K",
         posts: 1102,
@@ -484,10 +494,10 @@ export const categories = [
       {
         id: 4,
         name: "Siddhi Doshi",
-        profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMHvuXwp6XBHOnghbgEU72yClzAzMwUxIXCw&s",
+        profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0cLjhgZKFAESZOuhDn-QXlcClHNodQQhGeg&s",
         username: "kabir_malhotra",
-        profileImage: "https://via.placeholder.com/150",
-        bannerImage: "https://via.placeholder.com/600",
+       
+        bannerImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeK6UOAn_oADYYClUfYHWpIL4ifaetKzddg1Z2v_jDyH7-86czLEtpKNGfQk-PEGMDb7I&usqp=CAU",
         description:
           "Showcasing the perfect fusion of luxury streetwear and casual chic styles.",
         followers: "7.9K",
