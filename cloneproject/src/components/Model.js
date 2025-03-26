@@ -16,7 +16,7 @@ const ModelPage = () => {
   }
 
   return (
-    <div className="bg-pink-50 flex justify-center min-h-screen p-4">
+    <div className="bg-pink-50 flex justify-center min-h-screen p-4 mt-12">
       {/* Mobile Boundary */}
       <div className="bg-white w-full max-w-md shadow-lg rounded-lg overflow-hidden">
         {/* Header */}

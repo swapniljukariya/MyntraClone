@@ -14,7 +14,6 @@ import MenPage from "./components/MenPage.js"; // Men category page
 import WomenPage from "./components/WomenPage"; // Women category page
 import KidsPage from "./components/KidsPage"; // Kids category page
 import HomeLivingPage from "./components/HomeLivingPage"; // Home & Living category page
-import BeautyPage from "./components/BeautyPage"; // Beauty category page
 import StudioPage from "./components/StudioPage"; // Studio page
 import Profile from "./components/Profile.js"; // Profile page
 import Wishlist from "./components/WishListPage"; // Wishlist page
@@ -60,7 +59,6 @@ const router = createBrowserRouter(
       <Route path="women" element={<WomenPage />} />
       <Route path="kids" element={<KidsPage />} />
       <Route path="home-living" element={<HomeLivingPage />} />
-      <Route path="beauty" element={<BeautyPage />} />
       <Route path="studio" element={<StudioPage />} />
       <Route path="profile" element={<Login />} />
       {/* Additional pages */}

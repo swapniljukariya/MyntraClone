@@ -52,7 +52,7 @@ const Header = () => {
           isMenuOpen ? "block" : "hidden"
         } absolute top-full left-0 w-full bg-white md:static md:flex md:items-center md:space-x-8 md:block text-sm font-semibold text-gray-800`}
       >
-        {["men", "women", "kids", "home-living", "beauty", "studio"].map((item) => (
+        {["men", "women", "kids", "home-living",  "studio"].map((item) => (
           <NavLink
             key={item}
             to={`/${item}`}
